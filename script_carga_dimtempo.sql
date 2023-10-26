@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS dim_tempo;
-CREATE TABLE dim_tempo (
-        idAnoMesDia                      INTEGER PRIMARY KEY,  -- year*10000+month*100+day
+/*DROP TABLE IF EXISTS dimtempo;
+CREATE TABLE dimtempo (
+        idDimtempo         INTEGER PRIMARY KEY,  -- year*10000+month*100+day
         data                DATE NOT NULL,
         ano                 INTEGER NOT NULL,
         mes                 INTEGER NOT NULL, -- 1 to 12
@@ -11,7 +11,7 @@ CREATE TABLE dim_tempo (
         NomeMes             VARCHAR(9) NOT NULL, -- 'January', 'February'...
         FinaldeSemana       CHAR(1) DEFAULT 'F' CHECK (finaldesemana in ('T', 'F'))
 ) Engine=InnoDB;
-
+*/
 DROP PROCEDURE IF EXISTS carga_dimensao_tempo;
 DELIMITER //
 CREATE PROCEDURE carga_dimensao_tempo(IN startdate DATE,IN stopdate DATE)
@@ -19,7 +19,7 @@ BEGIN
     DECLARE currentdate DATE;
     SET currentdate = startdate;
     WHILE currentdate <= stopdate DO
-        INSERT INTO dim_tempo VALUES (
+        INSERT INTO dimtempo VALUES (
             YEAR(currentdate)*10000+MONTH(currentdate)*100 + DAY(currentdate),
             currentdate,
             YEAR(currentdate),
@@ -37,9 +37,9 @@ END
 //
 DELIMITER ;
 
-TRUNCATE TABLE dim_tempo;
+-- delete from  dimtempo;
 CALL carga_dimensao_tempo('2023-01-01','2023-12-31');
 
-Select * from dim_tempo limit 1000;
+Select * from dimtempo limit 1000;
 
 
