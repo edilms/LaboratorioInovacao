@@ -4,7 +4,7 @@
 -- Dimensão Condição Econômica
 -- ----------------------------
 
-use mmd_matricula;
+use mmd_facsenac;
 
 -- delete from DimCondicaoEconomica;
 
@@ -18,25 +18,25 @@ VALUES
 (4, "Classe média"),
 (5, "Classe alta");
 
-Select * from mmd_matricula.DimCondicaoEconomica;
+Select * from mmd_facsenac.DimCondicaoEconomica;
 
 -- ----------------------------
 -- Dimensão Raça
 -- ----------------------------
 
-use mmd_matricula;
+use mmd_facsenac;
 -- delete from DimRaca;
 
-INSERT INTO mmd_matricula.dimraca (deRaca)
+INSERT INTO mmd_facsenac.dimraca (deRaca)
 SELECT distinct raça FROM staging_matricula.alunos;
 
-SELECT * FROM mmd_matricula.dimraca;
+SELECT * FROM mmd_facsenac.dimraca;
 
 -- ----------------------------
 -- Dimensão Sexo
 -- ----------------------------
 
-use mmd_matricula;
+use mmd_facsenac;
 -- delete from DimSexo;
 
 INSERT into DimSexo (
@@ -46,27 +46,27 @@ VALUES
 (1, "Masculino"),
 (2, "Feminino");
 
-Select * from mmd_matricula.DimSexo;
+Select * from mmd_facsenac.DimSexo;
 
 -- ----------------------------
 -- Dimensão Curso
 -- ----------------------------
 
-use mmd_matricula;
+use mmd_facsenac;
 
 -- delete from DimCurso;
 
-insert into mmd_matricula.dimcurso (deCurso) 
+insert into mmd_facsenac.dimcurso (deCurso) 
 select distinct curso 
 from staging_matricula.matriculas;
 
-SELECT * FROM  mmd_matricula.dimcurso;
+SELECT * FROM  mmd_facsenac.dimcurso;
 
 -- ----------------------------
 -- Dimensão turno
 -- ----------------------------
 
-use mmd_matricula;
+use mmd_facsenac;
 
 -- delete from Dimturno;
 
